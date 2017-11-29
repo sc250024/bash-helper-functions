@@ -20,7 +20,7 @@ function __spinner() {
             # calculate the column where spinner and status msg will be displayed
             let column=$(tput cols)-${#2}-8
             # display message and position the cursor in $column column
-            echo -ne ${2}
+            echo -ne "${2}"
             printf "%${column}s"
 
             # start spinner
@@ -30,8 +30,9 @@ function __spinner() {
 
             while :
             do
+                # shellcheck disable=SC2059
                 printf "\b${sp:i++%${#sp}:1}"
-                sleep $delay
+                sleep "${delay}"
             done
             ;;
         stop)
@@ -40,7 +41,7 @@ function __spinner() {
                 exit 1
             fi
 
-            kill $3 > /dev/null 2>&1
+            kill "${3}" > /dev/null 2>&1
 
             # inform the user uppon success or failure
             echo -en "\b["
@@ -77,6 +78,6 @@ function __start_spinner {
 #----------------------------------------------------------------------------------------------------------------------
 function __stop_spinner() {
     # $1 : command exit status
-    __spinner "stop" ${1} $_sp_pid
+    __spinner "stop" "${1}" $_sp_pid
     unset _sp_pid
 }

@@ -6,19 +6,18 @@
 #     RETURNS:  N/A
 #----------------------------------------------------------------------------------------------------------------------
 __detect_color_support() {
-    COLORS=$(tput colors 2>/dev/null || echo 0)
-    if [[ $? -eq 0 && "$COLORS" -gt 2 ]]; then
+    if tput colors >/dev/null 2>&1 && [[ "$(tput colors 2>/dev/null)" -gt 2 ]]; then
         RC="\033[1;31m"
         GC="\033[1;32m"
         BC="\033[1;34m"
         YC="\033[1;33m"
-        EC="\033[0m"
+        NC="\033[0m"
     else
         RC=""
         GC=""
         BC=""
         YC=""
-        EC=""
+        NC=""
     fi
 }
 
@@ -29,7 +28,7 @@ __detect_color_support() {
 #     RETURNS:  The message in highlighted text (assuming terminal has color support)
 #----------------------------------------------------------------------------------------------------------------------
 __echo_error() {
-    printf "${RC} * ERROR${EC}: %s\n" "$@" 1>&2;
+    printf "${RC} * ERROR${NC}: %s\n" "$@" 1>&2;
 }
 
 #---  FUNCTION  -------------------------------------------------------------------------------------------------------
@@ -39,7 +38,17 @@ __echo_error() {
 #     RETURNS:  The message in highlighted text (assuming terminal has color support)
 #----------------------------------------------------------------------------------------------------------------------
 __echo_info() {
-    printf "${GC} * INFO${EC}: %s\n" "$@";
+    printf "${GC} * INFO${NC}: %s\n" "$@";
+}
+
+#---  FUNCTION  -------------------------------------------------------------------------------------------------------
+#        NAME:  __echo_unknown
+# DESCRIPTION:  Echo unknown information to stdout
+#       USAGE:  __echo_unknown "Some message pertaining to an unknown error"
+#     RETURNS:  The message in highlighted text (assuming terminal has color support)
+#----------------------------------------------------------------------------------------------------------------------
+__echo_unknown() {
+    printf "${BC} * UNKNOWN${NC}: %s\n" "$@";
 }
 
 #---  FUNCTION  -------------------------------------------------------------------------------------------------------
@@ -49,5 +58,5 @@ __echo_info() {
 #     RETURNS:  The message in highlighted text (assuming terminal has color support)
 #----------------------------------------------------------------------------------------------------------------------
 __echo_warn() {
-    printf "${YC} * WARN${EC}: %s\n" "$@";
+    printf "${YC} * WARN${NC}: %s\n" "$@";
 }
