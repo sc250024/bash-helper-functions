@@ -6,7 +6,7 @@
 #               __version_ge "1.0.4" "1.0.5" => False
 #     RETURNS:  Exit code of '0' if true, 1' if false
 #----------------------------------------------------------------------------------------------------------------------
-function __version_ge() { test "$(echo "$@" | tr " " "\\n" | gsort -rV | head -n 1)" == "$1"; }
+function __version_ge() { test "$(echo "$@" | tr " " "\\n" | sort -rV | head -n 1)" == "$1"; }
 
 #---  FUNCTION  -------------------------------------------------------------------------------------------------------
 #        NAME:  __version_gt
@@ -15,7 +15,7 @@ function __version_ge() { test "$(echo "$@" | tr " " "\\n" | gsort -rV | head -n
 #               __version_gt "1.0.5" "1.0.4" => True
 #     RETURNS:  Exit code of '0' if true, 1' if false
 #----------------------------------------------------------------------------------------------------------------------
-function __version_gt() { test "$(echo "$@" | tr " " "\\n" | gsort -V | head -n 1)" != "$1"; }
+function __version_gt() { test "$(echo "$@" | tr " " "\\n" | sort -V | head -n 1)" != "$1"; }
 
 #---  FUNCTION  -------------------------------------------------------------------------------------------------------
 #        NAME:  __version_le
@@ -24,7 +24,7 @@ function __version_gt() { test "$(echo "$@" | tr " " "\\n" | gsort -V | head -n 
 #               __version_le "1.0.5" "1.0.4" => False
 #     RETURNS:  Exit code of '0' if true, 1' if false
 #----------------------------------------------------------------------------------------------------------------------
-function __version_le() { test "$(echo "$@" | tr " " "\\n" | gsort -V | head -n 1)" == "$1"; }
+function __version_le() { test "$(echo "$@" | tr " " "\\n" | sort -V | head -n 1)" == "$1"; }
 
 #---  FUNCTION  -------------------------------------------------------------------------------------------------------
 #        NAME:  __version_lt
@@ -33,4 +33,4 @@ function __version_le() { test "$(echo "$@" | tr " " "\\n" | gsort -V | head -n 
 #               __version_lt "1.0.4" "1.0.5" => True
 #     RETURNS:  Exit code of '0' if true, 1' if false
 #----------------------------------------------------------------------------------------------------------------------
-function __version_lt() { test "$(echo "$@" | tr " " "\\n" | gsort -rV | head -n 1)" != "$1"; }
+function __version_lt() { test "$(echo "$@" | tr " " "\\n" | sort -rV | head -n 1)" != "$1"; }

@@ -13,8 +13,9 @@ __camelcase_split() {
 #---  FUNCTION  -------------------------------------------------------------------------------------------------------
 #        NAME:  __join_array_by_char
 # DESCRIPTION:  Join an array of strings by some character
-#       USAGE:  __join_array_by_char "${SOMEARRAY[@]}"
-#     RETURNS:  String without duplicates (i.e. "some string with duplicates")
+#       USAGE:  export SOMEARRAY=("some" "array" "with" "items")
+#               __join_array_by_char ";" "${SOMEARRAY[@]}"
+#     RETURNS:  One string with all array elements joined by the character specified
 #----------------------------------------------------------------------------------------------------------------------
 __join_array_by_char() {
     if [ $# -ge 3 ]; then
